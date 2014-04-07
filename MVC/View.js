@@ -7,7 +7,8 @@ View.prototype.render = function() {
 	// You can use either PIXI.WebGLRenderer or PIXI.CanvasRenderer
 
 	// create an new instance of a pixi stage
-	var stage = new PIXI.Stage(0x66FF99);
+	var interactive = true;
+	var stage = new PIXI.Stage(0x66FF99, interactive);
 
 	// create a renderer instance.
 	var renderer = PIXI.autoDetectRenderer(840, 500);
@@ -23,7 +24,7 @@ View.prototype.render = function() {
 	var text = new PIXI.Text("Dealer Cards:\n\n\n\n\nYour Cards:", {
 		font : "bold italic 35px Desyrel",
 		align : "center"
-	})
+	});
 	text.position.x = 280;
 	text.position.y = 70;
 	text.anchor.x = 0.5;
@@ -33,15 +34,23 @@ View.prototype.render = function() {
 	var pointText = new PIXI.Text("10\n\n\n18", {
 		font : "bold italic 60px Desyrel",
 		align : "center"
-	})
+	});
 	pointText.position.x = 280;
 	pointText.position.y = 120;
 	pointText.anchor.x = 0.5;
 	
 	stage.addChild(pointText);
+	
+	var hitButton = new MEButton(417,430,80,30,"HIT",stage, function(data) {
+			console.log("HIT button clicked");
+	});
+	var standButton = new MEButton(607,430,80,30,"STAND",stage,function(data) {
+			console.log("STAND button clicked");
+	});
 
 	function animate() {
 		renderer.render(stage);
+		requestAnimFrame(animate);
 	}
 
 	requestAnimFrame(animate);
@@ -56,5 +65,6 @@ View.prototype.render = function() {
 		pointText.setText(splitStr[0] + "\n\n\n" + points);
 	}
 };
+
 
 

@@ -20,10 +20,6 @@ var CardView = function(x, y, stage) {
 
 	cardSprite.mask = cardMask;
 
-	
-
-	//	renderer.render(stage);
-
 	this.setCard = function(suite, value) {
 		value--;
 		suite--;
@@ -35,9 +31,3 @@ var CardView = function(x, y, stage) {
 
 	return this;
 };
-/*
-CardView.prototype.setCard = function(suite, value) {
-	cardSprite.x = cardWidth * value;
-	cardSprite.y = cardHeight * value;
-}
-*/
