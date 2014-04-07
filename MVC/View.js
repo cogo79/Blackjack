@@ -4,22 +4,17 @@ var View = function() {
 };
 
 View.prototype.render = function() {
-	// You can use either PIXI.WebGLRenderer or PIXI.CanvasRenderer
-
-	// create an new instance of a pixi stage
 	var interactive = true;
 	var stage = new PIXI.Stage(0x66FF99, interactive);
 
-	// create a renderer instance.
 	var renderer = PIXI.autoDetectRenderer(840, 500);
 
-	// add the renderer view element to the DOM
 	document.getElementById("output").appendChild(renderer.view);
 
-	this.dealerCard1 = CardView(450, 300, stage);
-	this.dealerCard2 = CardView(510, 300, stage);
-	this.playerCard1 = CardView(450, 100, stage);
-	this.playerCard2 = CardView(510, 100, stage);
+	this.dealerCard1 = new CardView(450, 100, stage);
+	this.dealerCard2 = new CardView(510, 100, stage);
+	this.playerCard1 = new CardView(450, 300, stage);
+	this.playerCard2 = new CardView(510, 300, stage);
 
 	var text = new PIXI.Text("Dealer Cards:\n\n\n\n\nYour Cards:", {
 		font : "bold italic 35px Desyrel",
@@ -64,7 +59,7 @@ View.prototype.render = function() {
 		var splitStr = pointText.text.split("\n\n\n");
 		pointText.setText(splitStr[0] + "\n\n\n" + points);
 	}
-//	this.dealerCard1.faceDown();
+	this.dealerCard1.faceDown();
 //	this.dealerCard1.faceUp();
 };
 
