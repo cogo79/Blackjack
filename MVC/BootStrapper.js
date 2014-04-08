@@ -7,6 +7,7 @@ function bootstrapper() {
 	
 	var controller = new Controller();
 	controller.newGame();
+	
 }
 
 bootstrapper();
