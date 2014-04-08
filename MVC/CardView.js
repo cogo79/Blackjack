@@ -4,6 +4,8 @@ var cardHeight = 84;
 var CardView = function(x, y, stage) {
 	var positionX = x;
 	var positionY = y;
+	var cardText = "2d";
+	var isFaceDownLocalBoolean = false;
 
 	cardMask = new PIXI.Graphics();
 	cardMask.beginFill();
@@ -23,23 +25,34 @@ var CardView = function(x, y, stage) {
 	this.setCard = function(text) {
 		cardSprite.x = positionX - cardWidth * getCardDenomination(text);
 		cardSprite.y = positionY - cardHeight * getCardSuite(text);
-		console.log("cardSprite.x", cardSprite.x);
-		console.log("cardSprite.y", cardSprite.y);
+		cardText = text;
 	}
 	var coloredRectangle = new PIXI.Graphics();
 	coloredRectangle.beginFill(0x1E90FF);
 	coloredRectangle.drawRect(9, 9, 42, 66);
 	coloredRectangle.endFill();
 
-	this.faceDown = function() {
-		this.setCard(1, 1);
+	this.turnFaceDown = function() {
+		var temp = cardText;
+		this.setCard("2s");
+		cardText = temp;
 		cardSprite.addChild(coloredRectangle);
+		isFaceDownLocalBoolean = true;
 	};
-	this.faceUp = function() {
+	this.turnFaceUp = function() {
 		cardSprite.removeChild(coloredRectangle);
+		this.setCard(cardText);
+		isFaceDownLocalBoolean = false;
 	};
+	
+	this.isFaceDown = function() {
+		return isFaceDownLocalBoolean;
+	}
+	
+	return this;
+};
 
-	var getCardSuite = function(text) {
+var getCardSuite = function(text) {
 		var lastChar = text.charAt(text.length - 1);
 		switch(lastChar) {
 			case "s":
@@ -89,5 +102,3 @@ var CardView = function(x, y, stage) {
 				return parseInt(firstChar)-2;
 		}
 	}
-	return this;
-};

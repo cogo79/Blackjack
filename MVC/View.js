@@ -64,11 +64,11 @@ View.prototype.render = function() {
 
 	}
 	
-	this.dealerCard1.setCard("2s");
+	this.dealerCard1.setCard("10h");
 	
-//	this.dealerCard1.faceDown();
+	this.dealerCard1.turnFaceDown();
 	
 	
-	//	this.dealerCard1.faceUp();
+		this.dealerCard1.turnFaceUp();
 };
 
