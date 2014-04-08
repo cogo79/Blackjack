@@ -45,6 +45,8 @@ View.prototype.render = function() {
 
 	requestAnimFrame(animate);
 
+	var cards = new Array();
+
 	this.setDealerPointsText = function(points) {
 		var splitStr = pointText.text.split("\n\n\n");
 		pointText.setText(points + "\n\n\n" + splitStr[1]);
@@ -61,19 +63,35 @@ View.prototype.render = function() {
 	this.addCard = function(x, y, text) {
 		var cardView = new CardView(x, y, stage);
 		cardView.setCard(text);
-		this.cards = new Array();
-		this.cards.push(cardView);
+
+		cards.push(cardView);
 		return cardView;
 	}
-	this.removeCard = function(card) {
-		var position = this.cards.indexOf(card);
+	this.removeCard = function(CardText) {
+		var position = this.cards.indexOf(findCard(CardText));
 		if (~position)
-			this.cards.slice(position, 1);
+			cards.slice(position, 1);
 		card.destroy();
 		/*
 		 var tag_story = [1, 3, 56, 6, 8, 90], id_tag = 56, position = tag_story.indexOf(id_tag);
 		 if (~position)
 		 tag_story.splice(position, 1);
 		 */
+	}
+
+	this.turnFaceUp = function(CardText) {
+		findCard(CardText).turnFaceUp();
+	}
+
+	this.turnFaceDown = function(CardText) {
+		findCard(CardText).turnFaceDown();
+	}
+	
+	var findCard = function(CardText) {
+		for (var i = 0; i < cards.length; i++) {
+			if (cards[i].text() == CardText) {
+				return cards[i];
+			}
+		}
 	}
 };

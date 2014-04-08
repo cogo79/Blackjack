@@ -1,5 +1,12 @@
-var Card = function(text) {
-	this.value = text;
-	this.faceDown = true;
+var Card = function(cardText) {
+	var value = cardText;
+	this.faceDown = false;
+	
+	this.text = function() {
+		return value;
+	}
+	this.points = function(currentPointsForPlayerOr) {
+		
+	}
 	return this;
 }
