@@ -52,6 +52,11 @@ var CardView = function(x, y, stage) {
 	return this;
 };
 
+CardView.prototype.destroy = function() {
+	stage.removeChild(cardMask);
+	stage.removeChild(cardSprite);
+}
+
 var getCardSuite = function(text) {
 		var lastChar = text.charAt(text.length - 1);
 		switch(lastChar) {

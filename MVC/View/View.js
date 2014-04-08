@@ -11,11 +11,6 @@ View.prototype.render = function() {
 
 	document.getElementById("output").appendChild(renderer.view);
 
-	this.dealerCard1 = new CardView(450, 100, stage);
-	this.dealerCard2 = new CardView(510, 100, stage);
-	this.playerCard1 = new CardView(450, 300, stage);
-	this.playerCard2 = new CardView(510, 300, stage);
-
 	var text = new PIXI.Text("Dealer Cards:\n\n\n\n\nYour Cards:", {
 		font : "bold italic 35px Desyrel",
 		align : "center"
@@ -63,12 +58,22 @@ View.prototype.render = function() {
 	this.giveCardToDealer = function(text) {
 
 	}
-	
-	this.dealerCard1.setCard("10h");
-	
-	this.dealerCard1.turnFaceDown();
-	
-	
-		this.dealerCard1.turnFaceUp();
+	this.addCard = function(x, y, text) {
+		var cardView = new CardView(x, y, stage);
+		cardView.setCard(text);
+		this.cards = new Array();
+		this.cards.push(cardView);
+		return cardView;
+	}
+	this.removeCard = function(card) {
+		var position = this.cards.indexOf(card);
+		if (~position)
+			this.cards.slice(position, 1);
+		card.destroy();
+		/*
+		 var tag_story = [1, 3, 56, 6, 8, 90], id_tag = 56, position = tag_story.indexOf(id_tag);
+		 if (~position)
+		 tag_story.splice(position, 1);
+		 */
+	}
 };
-
