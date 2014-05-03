@@ -5,8 +5,15 @@ var Card = function(cardText) {
 	this.text = function() {
 		return value;
 	}
+	/*
 	this.points = function(currentPointsForPlayerOr) {
 		
 	}
+	*/
+	
+	this.firstChar = function() {
+		return value.charAt();
+	}
+	
 	return this;
 }

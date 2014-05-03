@@ -17,8 +17,11 @@ var Model = function() {
 		view.dealACardToDealer(dealer.cards[i].text());
 		if (faceDown == true) {
 			view.turnFaceDown(dealer.cards[i].text());
+		} else {
+			dealer.addPointsForCard(dealer.cards[i], view);
 		}
 	}
+	
 	
 	var playerCardPositionX = 390;
 	this.dealACardToPlayer = function() {
@@ -26,13 +29,12 @@ var Model = function() {
 		var i = player.cards.length-1;
 		playerCardPositionX += 60;
 		view.dealACardToPlayer(player.cards[i].text());
+		player.addPointsForCard(player.cards[i], view);
 	};
 	
-	/*
-	this.dealACardToPlayer = function(cardText) {
-		this.view.dealACardToPlayer(cardText);
+	var pointsForCard = function(card, currentPoints) {
+		
 	}
-	*/
 	
 	return this;
 };
