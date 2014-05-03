@@ -4,13 +4,20 @@ var Controller = function() {
 
 Controller.prototype.start = function() {
 
-	var view = new View;
-	view.render();
-
-	var deckOfCards = new DeckOfCards();
-	var dealer = new Dealer();
-	var player = new Player();
+	var model = new Model();
 	
+	/*
+	model.view.dealACardToPlayer("As");
+	model.view.dealACardToPlayer("3c");
+	
+	model.view.dealACardToDealer("Kd");
+	model.view.dealACardToDealer("Jh");
+	*/
+	model.dealACardToDealer(false);
+	model.dealACardToDealer(false);
+	model.dealACardToPlayer();
+	model.dealACardToPlayer();
+	/*
 	var dealerCardPositionX = 390;
 	var dealACardToDealer = function(faceDown) {
 		dealer.cards.push(deckOfCards.getACard());
@@ -34,12 +41,9 @@ Controller.prototype.start = function() {
 	var pointsForCard = function(cardText) {
 		
 	};
+	*/
 	
-	dealACardToDealer(true);
-	dealACardToDealer(false);
 	
-	dealACardToPlayer();
-	dealACardToPlayer();
 	//view.removeCard(cardView);
 }
 /*

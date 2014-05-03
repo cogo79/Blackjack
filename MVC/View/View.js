@@ -60,12 +60,22 @@ View.prototype.render = function() {
 	this.giveCardToDealer = function(text) {
 
 	}
-	this.addCard = function(x, y, text) {
+	var dealCard = function(x, y, text) {
 		var cardView = new CardView(x, y, stage);
 		cardView.setCard(text);
 
 		cards.push(cardView);
 		return cardView;
+	}
+	var dealerCardPositionX = 390;
+	this.dealACardToDealer = function(text) {
+		dealerCardPositionX += 60;
+		dealCard(dealerCardPositionX, 100, text);
+	}
+	var playerCardPositionX = 390;
+	this.dealACardToPlayer = function(text) {
+		playerCardPositionX += 60;
+		dealCard(playerCardPositionX, 300, text);
 	}
 	this.removeCard = function(CardText) {
 		var position = this.cards.indexOf(findCard(CardText));
