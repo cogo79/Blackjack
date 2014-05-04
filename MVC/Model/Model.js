@@ -1,7 +1,6 @@
-var Model = function() {
+var Model = function(viewParameter) {
 	
-	var view = new View();
-	view.render();
+	var view = viewParameter;
 
 	var deckOfCards = new DeckOfCards();
 	var dealer = new Dealer();

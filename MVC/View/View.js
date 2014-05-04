@@ -1,9 +1,8 @@
 var View = function() {
-
-	return this;
-};
-
-View.prototype.render = function() {
+	var model;
+	this.setModel = function (modelParameter) {
+		model = modelParameter;
+	};
 	var interactive = true;
 	var stage = new PIXI.Stage(0x66FF99, interactive);
 
@@ -33,6 +32,9 @@ View.prototype.render = function() {
 
 	var hitButton = new MEButton(417, 430, 80, 30, "HIT", stage, function(data) {
 		console.log("HIT button clicked");
+		//console.log(this.model);
+		model.dealACardToPlayer();
+
 	});
 	var standButton = new MEButton(607, 430, 80, 30, "STAND", stage, function(data) {
 		console.log("STAND button clicked");
@@ -96,7 +98,6 @@ View.prototype.render = function() {
 	this.turnFaceDown = function(CardText) {
 		findCard(CardText).turnFaceDown();
 	}
-	
 	var findCard = function(CardText) {
 		for (var i = 0; i < cards.length; i++) {
 			if (cards[i].text() == CardText) {
@@ -104,4 +105,11 @@ View.prototype.render = function() {
 			}
 		}
 	}
+	return this;
 };
+
+/*
+View.prototype.render = function() {
+
+};
+*/

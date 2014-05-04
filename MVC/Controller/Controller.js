@@ -1,17 +1,32 @@
 var Controller = function() {
+	var model;
+	var view;
+	this.newGame = function() {
+
+		view = new View();
+		//view.render();
+		var model = new Model(view);
+		view.setModel(model);
+
+		model.dealACardToDealer(true);
+		model.dealACardToDealer(false);
+		model.dealACardToPlayer();
+		model.dealACardToPlayer();
+	}
 	return this;
 }
+/*
+ Controller.prototype.start = function() {
 
-Controller.prototype.start = function() {
+ var model = new Model();
 
-	var model = new Model();
-	
-	model.dealACardToDealer(true);
-	model.dealACardToDealer(false);
-	model.dealACardToPlayer();
-	model.dealACardToPlayer();
+ model.dealACardToDealer(true);
+ model.dealACardToDealer(false);
+ model.dealACardToPlayer();
+ model.dealACardToPlayer();
 
-}
+ }
+ */
 /*
 
  this.dealerCard1 = new CardView(450, 100, stage);

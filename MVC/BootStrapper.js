@@ -3,7 +3,7 @@ function bootstrapper() {
 	headerController.loadHeaderView("headerText");
 
 	var controller = new Controller();
-	controller.start();
+	controller.newGame();
 
 	
 }
