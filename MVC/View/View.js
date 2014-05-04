@@ -6,16 +6,25 @@ var View = function() {
 	var interactive = true;
 	var stage = new PIXI.Stage(0x66FF99, interactive);
 
-	var renderer = PIXI.autoDetectRenderer(840, 500);
+	var renderer = PIXI.autoDetectRenderer(840, 600);
 
 	document.getElementById("output").appendChild(renderer.view);
-
+	
+	var header = new PIXI.Text("BLACKJACK", {
+		font : "Bold 100px Arial",
+		align : "Center"
+	});
+	header.position.x = 420;
+	header.position.y = 30;
+	header.anchor.x = 0.5;
+	stage.addChild(header);
+	
 	var text = new PIXI.Text("Dealer Cards:\n\n\n\n\nYour Cards:", {
 		font : "bold italic 35px Desyrel",
 		align : "center"
 	});
 	text.position.x = 280;
-	text.position.y = 70;
+	text.position.y = 170;
 	text.anchor.x = 0.5;
 
 	stage.addChild(text);
@@ -25,18 +34,18 @@ var View = function() {
 		align : "center"
 	});
 	pointText.position.x = 280;
-	pointText.position.y = 120;
+	pointText.position.y = 220;
 	pointText.anchor.x = 0.5;
 
 	stage.addChild(pointText);
 
-	var hitButton = new MEButton(417, 430, 80, 30, "HIT", stage, function(data) {
+	var hitButton = new MEButton(417, 530, 80, 30, "HIT", stage, function(data) {
 		console.log("HIT button clicked");
 		//console.log(this.model);
 		model.dealACardToPlayer();
 
 	});
-	var standButton = new MEButton(607, 430, 80, 30, "STAND", stage, function(data) {
+	var standButton = new MEButton(607, 530, 80, 30, "STAND", stage, function(data) {
 		console.log("STAND button clicked");
 	});
 
@@ -72,12 +81,12 @@ var View = function() {
 	var dealerCardPositionX = 390;
 	this.dealACardToDealer = function(text) {
 		dealerCardPositionX += 60;
-		dealCard(dealerCardPositionX, 100, text);
+		dealCard(dealerCardPositionX, 200, text);
 	}
 	var playerCardPositionX = 390;
 	this.dealACardToPlayer = function(text) {
 		playerCardPositionX += 60;
-		dealCard(playerCardPositionX, 300, text);
+		dealCard(playerCardPositionX, 400, text);
 	}
 	this.removeCard = function(CardText) {
 		var position = this.cards.indexOf(findCard(CardText));
