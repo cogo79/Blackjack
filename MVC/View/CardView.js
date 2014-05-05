@@ -7,7 +7,7 @@ var CardView = function(x, y, stage) {
 	var cardText = "2d";
 	var isFaceDownLocalBoolean = false;
 
-	cardMask = new PIXI.Graphics();
+	var cardMask = new PIXI.Graphics();
 	cardMask.beginFill();
 	cardMask.drawRect(x, y, cardWidth, cardHeight);
 	cardMask.endFill();
@@ -60,9 +60,10 @@ var CardView = function(x, y, stage) {
 	}
 
 	this.destroy = function() {
+		console.log("this.destroy = function() {");
 		stage.removeChild(cardMask);
 		stage.removeChild(cardSprite);
-	}
+	};
 
 	return this;
 };

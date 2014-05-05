@@ -26,7 +26,6 @@ var View = function() {
 	text.position.x = 280;
 	text.position.y = 170;
 	text.anchor.x = 0.5;
-
 	stage.addChild(text);
 
 	var pointText = new PIXI.Text("10\n\n\n18", {
@@ -43,10 +42,36 @@ var View = function() {
 		console.log("HIT button clicked");
 		//console.log(this.model);
 		model.dealACardToPlayer();
-
 	});
+	
+	var removeAllCards = function() {
+		/*
+		console.log("cards.length: ", cards.length);
+		cards[0].destroy();
+		console.log("cards: ", cards);
+		
+		cards[1].destroy();
+		cards[2].destroy();
+		
+		
+		for (var i = 0; i < cards.length; i++) {
+			
+		}
+		*/
+		
+		
+		
+		
+		while (cards.length != 0) {
+			var card = cards.pop();
+			card.destroy();
+		}
+		
+	}
+	
 	var standButton = new MEButton(607, 530, 80, 30, "STAND", stage, function(data) {
 		console.log("STAND button clicked");
+		removeAllCards();
 	});
 
 	function animate() {
@@ -99,6 +124,7 @@ var View = function() {
 		 tag_story.splice(position, 1);
 		 */
 	}
+	
 
 	this.turnFaceUp = function(CardText) {
 		findCard(CardText).turnFaceUp();
