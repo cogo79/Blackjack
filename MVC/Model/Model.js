@@ -21,7 +21,6 @@ var Model = function(viewParameter) {
 	}
 	var playerCardPositionX = 390;
 	this.dealACardToPlayer = function() {
-		
 		player.cards.push(deckOfCards.getACard());
 		var i = player.cards.length - 1;
 		playerCardPositionX += 60;
@@ -30,9 +29,20 @@ var Model = function(viewParameter) {
 		if (player.points > 21) {// Good place for unit test.
 			view.hitButton.disableClick();
 			setTimeout(function() {
+				view.playerIsBust();
 				NotificationCenter.dealerWon();
 				view.hitButton.enableClick();
 			}, 50);
+		}
+	};
+	
+	this.turnDealersFaceDownCardsFaceUp = function() { // Though it would only be one card face down.
+		for (var i = 0; i < dealer.cards.length; i++) {
+			if (dealer.cards[i].faceDown) {
+				dealer.cards[i].faceDown = false;
+				dealer.addPointsForCard(dealer.cards[i], view);
+				view.turnFaceUp(dealer.cards[i].text());
+			}
 		}
 	};
 

@@ -58,6 +58,7 @@ var View = function() {
 
 	this.standButton = new MEButton(607, 530, 80, 30, "STAND", stage, function(data) {
 			console.log("STAND button clicked");
+			model.turnDealersFaceDownCardsFaceUp();
 	});
 
 	function animate() {
@@ -68,6 +69,17 @@ var View = function() {
 	requestAnimFrame(animate);
 
 	var cards = new Array();
+	
+	/*
+	this.turnFaceUp = function(cardText) {
+		for (var i = 0; i < cards.length; i++) {
+			if (cards[i].cardText == cardText) {
+				cards[i].turnFaceUp();
+				cards[i].setCard(cardText);
+			}
+		}
+	};
+	*/
 
 	this.setDealerPointsText = function(points) {
 		var splitStr = pointText.text.split("\n\n\n");
@@ -115,20 +127,28 @@ var View = function() {
 
 	 }
 	 */
+	var findCard = function(CardText) {
+		var card;
+		for (var i = 0; i < cards.length; i++) {
+			if (cards[i].text() == CardText) {
+				card = cards[i];
+				console.log(card);
+				return cards[i];
+			}
+		}
+	}
 
 	this.turnFaceUp = function(CardText) {
-		findCard(CardText).turnFaceUp();
-	}
+		var card = findCard(CardText);
+		card.turnFaceUp();
+	};
 
 	this.turnFaceDown = function(CardText) {
 		findCard(CardText).turnFaceDown();
 	}
-	var findCard = function(CardText) {
-		for (var i = 0; i < cards.length; i++) {
-			if (cards[i].text() == CardText) {
-				return cards[i];
-			}
-		}
+	
+	this.playerIsBust = function() {
+		alert("You are bust!");
 	}
 	NotificationCenter.registerForPlayerWinNotification(this);
 	this.playerWon = function() {
