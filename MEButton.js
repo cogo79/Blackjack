@@ -14,7 +14,22 @@ var MEButton = function(x, y, width, height, text, stage, clickAction) {
 
 	ellipse.hitArea = new PIXI.Ellipse(x, y, width, height);
 
+	var clickable = true;
+	var click = clickAction;
 	ellipse.click = clickAction;
+	this.disableClick = function() {
+		ellipse.click = function(data) {
+			console.log("Click disabled");
+		};
+		clickable = false;
+	};
+	this.enableClick = function() {
+		ellipse.click = clickAction;
+		clickable = true;
+	};
+	this.clickEnabled = function() {
+		return clickable;
+	};
 
 	stage.addChild(ellipse);
 

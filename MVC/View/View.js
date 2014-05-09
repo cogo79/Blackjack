@@ -50,14 +50,14 @@ var View = function() {
 		yesRemoveAllCards();
 	};
 
-	var hitButton = new MEButton(417, 530, 80, 30, "HIT", stage, function(data) {
+	this.hitButton = new MEButton(417, 530, 80, 30, "HIT", stage, function(data) {
 		console.log("HIT button clicked");
 		//console.log(this.model);
 		model.dealACardToPlayer();
 	});
 
-	var standButton = new MEButton(607, 530, 80, 30, "STAND", stage, function(data) {
-		console.log("STAND button clicked");
+	this.standButton = new MEButton(607, 530, 80, 30, "STAND", stage, function(data) {
+			console.log("STAND button clicked");
 	});
 
 	function animate() {
@@ -90,11 +90,14 @@ var View = function() {
 		return cardView;
 	}
 	var dealerCardPositionX = 390;
+
 	this.dealACardToDealer = function(text) {
+		console.log("standButtonEnabled");
 		dealerCardPositionX += 60;
 		dealCard(dealerCardPositionX, 200, text);
 	}
 	var playerCardPositionX = 390;
+
 	this.dealACardToPlayer = function(text) {
 		playerCardPositionX += 60;
 		dealCard(playerCardPositionX, 400, text);
