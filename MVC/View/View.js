@@ -1,6 +1,6 @@
 var View = function() {
 	var model;
-	this.setModel = function (modelParameter) {
+	this.setModel = function(modelParameter) {
 		model = modelParameter;
 	};
 	var interactive = true;
@@ -9,7 +9,7 @@ var View = function() {
 	var renderer = PIXI.autoDetectRenderer(840, 600);
 
 	document.getElementById("output").appendChild(renderer.view);
-	
+
 	var header = new PIXI.Text("BLACKJACK", {
 		font : "Bold 100px Arial",
 		align : "Center"
@@ -18,7 +18,7 @@ var View = function() {
 	header.position.y = 30;
 	header.anchor.x = 0.5;
 	stage.addChild(header);
-	
+
 	var text = new PIXI.Text("Dealer Cards:\n\n\n\n\nYour Cards:", {
 		font : "bold italic 35px Desyrel",
 		align : "center"
@@ -38,40 +38,26 @@ var View = function() {
 
 	stage.addChild(pointText);
 
+	var yesRemoveAllCards = function() {
+		while (cards.length != 0) {
+			var card = cards.pop();
+			card.destroy();
+		}
+
+	};
+
+	this.removeAllCards = function() {
+		yesRemoveAllCards();
+	};
+
 	var hitButton = new MEButton(417, 530, 80, 30, "HIT", stage, function(data) {
 		console.log("HIT button clicked");
 		//console.log(this.model);
 		model.dealACardToPlayer();
 	});
-	
-	var removeAllCards = function() {
-		/*
-		console.log("cards.length: ", cards.length);
-		cards[0].destroy();
-		console.log("cards: ", cards);
-		
-		cards[1].destroy();
-		cards[2].destroy();
-		
-		
-		for (var i = 0; i < cards.length; i++) {
-			
-		}
-		*/
-		
-		
-		
-		
-		while (cards.length != 0) {
-			var card = cards.pop();
-			card.destroy();
-		}
-		
-	}
-	
+
 	var standButton = new MEButton(607, 530, 80, 30, "STAND", stage, function(data) {
 		console.log("STAND button clicked");
-		removeAllCards();
 	});
 
 	function animate() {
@@ -113,18 +99,19 @@ var View = function() {
 		playerCardPositionX += 60;
 		dealCard(playerCardPositionX, 400, text);
 	}
-	this.removeCard = function(CardText) {
-		var position = this.cards.indexOf(findCard(CardText));
-		if (~position)
-			cards.slice(position, 1);
-		card.destroy();
-		/*
-		 var tag_story = [1, 3, 56, 6, 8, 90], id_tag = 56, position = tag_story.indexOf(id_tag);
-		 if (~position)
-		 tag_story.splice(position, 1);
-		 */
-	}
-	
+	/*
+	 this.removeCard = function(CardText) {
+	 var position = this.cards.indexOf(findCard(CardText));
+	 if (~position)
+	 cards.slice(position, 1);
+	 card.destroy();
+	 /*
+	 var tag_story = [1, 3, 56, 6, 8, 90], id_tag = 56, position = tag_story.indexOf(id_tag);
+	 if (~position)
+	 tag_story.splice(position, 1);
+
+	 }
+	 */
 
 	this.turnFaceUp = function(CardText) {
 		findCard(CardText).turnFaceUp();
@@ -140,11 +127,28 @@ var View = function() {
 			}
 		}
 	}
+	NotificationCenter.registerForPlayerWinNotification(this);
+	this.playerWon = function() {
+		alert("You win!");
+	}
+	NotificationCenter.registerForDealerWinNotification(this);
+	this.dealerWon = function() {
+		alert("Dealer wins");
+	}
+	this.newGame = function() {
+		while (cards.length != 0) {
+			var card = cards.pop();
+			console.log(card);
+			card.destroy();
+		}
+		dealerCardPositionX = 390;
+		playerCardPositionX = 390;
+	};
 	return this;
 };
 
 /*
-View.prototype.render = function() {
+ View.prototype.render = function() {
 
-};
-*/
+ };
+ */

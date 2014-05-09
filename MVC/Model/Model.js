@@ -29,7 +29,11 @@ var Model = function(viewParameter) {
 		playerCardPositionX += 60;
 		view.dealACardToPlayer(player.cards[i].text());
 		player.addPointsForCard(player.cards[i], view);
+		if (player.points > 21) { // Good place for unit test.
+			setTimeout(function() { NotificationCenter.dealerWon(); }, 50);
+		}
 	};
+	
 	
 	var pointsForCard = function(card, currentPoints) {
 		

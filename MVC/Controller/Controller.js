@@ -1,10 +1,11 @@
 var Controller = function() {
 	var model;
-	var view;
+	var view = new View();
 	this.newGame = function() {
 
-		view = new View();
+		//view = new View();
 		//view.render();
+		view.newGame();
 		var model = new Model(view);
 		view.setModel(model);
 
@@ -12,6 +13,14 @@ var Controller = function() {
 		model.dealACardToDealer(false);
 		model.dealACardToPlayer();
 		model.dealACardToPlayer();
+	}
+	NotificationCenter.registerForPlayerWinNotification(this);
+	this.playerWon = function() {
+		this.newGame();
+	}
+	NotificationCenter.registerForDealerWinNotification(this);
+	this.dealerWon = function() {
+		this.newGame();
 	}
 	return this;
 }
