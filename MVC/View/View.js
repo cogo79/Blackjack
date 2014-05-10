@@ -58,7 +58,7 @@ var View = function() {
 
 	this.standButton = new MEButton(607, 530, 80, 30, "STAND", stage, function(data) {
 			console.log("STAND button clicked");
-			model.turnDealersFaceDownCardsFaceUp();
+			model.playerStands();
 	});
 
 	function animate() {
@@ -157,6 +157,10 @@ var View = function() {
 	NotificationCenter.registerForDealerWinNotification(this);
 	this.dealerWon = function() {
 		alert("Dealer wins");
+	}
+	NotificationCenter.registerForDrawNotification(this);
+	this.draw = function() {
+		alert("Draw");
 	}
 	this.newGame = function() {
 		while (cards.length != 0) {

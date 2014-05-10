@@ -35,8 +35,12 @@ var Model = function(viewParameter) {
 			}, 50);
 		}
 	};
-	
-	this.turnDealersFaceDownCardsFaceUp = function() { // Though it would only be one card face down.
+
+	this.playerStands = function() {// Though it would only be one card face down.
+
+		view.hitButton.disableClick();
+		view.standButton.disableClick();
+
 		for (var i = 0; i < dealer.cards.length; i++) {
 			if (dealer.cards[i].faceDown) {
 				dealer.cards[i].faceDown = false;
@@ -44,6 +48,22 @@ var Model = function(viewParameter) {
 				view.turnFaceUp(dealer.cards[i].text());
 			}
 		}
+		while (dealer.points <= 16) {
+			this.dealACardToDealer(false);
+		}
+		setTimeout(function() {
+			if (dealer.points < player.points) {
+				NotificationCenter.playerWon();
+			} else if (dealer.points > player.points && dealer.points <= 21) {
+				NotificationCenter.dealerWon();
+			} else if (dealer.points == player.points) {// good place for unit test
+				NotificationCenter.draw();
+			} else {
+				NotificationCenter.playerWon();
+			}
+			view.hitButton.enableClick();
+			view.standButton.enableClick();
+		}, 50);
 	};
 
 	var pointsForCard = function(card, currentPoints) {

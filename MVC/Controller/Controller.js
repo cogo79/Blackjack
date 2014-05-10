@@ -22,6 +22,10 @@ var Controller = function() {
 	this.dealerWon = function() {
 		this.newGame();
 	}
+	NotificationCenter.registerForDrawNotification(this);
+	this.draw = function() {
+		this.newGame();
+	}
 	return this;
 }
 /*
